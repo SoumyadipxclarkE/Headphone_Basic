@@ -1,2 +1,60 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+
+import java.util.Scanner;
+
+class HeadPhone {
+    int frequency;
+    String company;
+    String type;
+    static int newFrequency;
+    static String newType;
+
+    void newHP(int freq, String comp, String ty) {
+        frequency = freq;
+        company = comp;
+        type = ty;
+    }
+
+    void displayHP() {
+        System.out.println("Detected frequency: " + frequency);
+        System.out.println("Headphone Company: " + company);
+        System.out.println("Music Type: " + type);
+
+        System.out.println("Changing/New Frequency: " + newFrequency);
+        System.out.println("Changing/New Genre: " + newType + "\n");
+    }
+
+    static void changeFrequency(int changeFreq) {
+        newFrequency = changeFreq;
+    }
+
+    static void changeType(String changeTy) {
+        newType = changeTy;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        HeadPhone h1 = new HeadPhone();
+
+        System.out.print("Enter detected frequency: ");
+        int detectedFrequency = sc.nextInt();
+        String musicType;
+
+        if (detectedFrequency >= 16 && detectedFrequency <= 250) {
+            musicType = "Bass Boosted";
+        } else if (detectedFrequency >= 250.1 && detectedFrequency <= 6000) {
+            musicType = "Instrumental";
+        } else if (detectedFrequency >= 6100 && detectedFrequency <= 16000) {
+            musicType = "Treble Boosted";
+        } else {
+            musicType = "Unknown";
+        }
+
+        h1.newHP(detectedFrequency, "SONY", musicType);
+        h1.displayHP();
+
+        sc.close();
+    }
+}
